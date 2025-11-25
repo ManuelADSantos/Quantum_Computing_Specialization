@@ -5,3 +5,4 @@ pylatexenc
 matplotlib
 numpy
 pandas
+python-dotenv
