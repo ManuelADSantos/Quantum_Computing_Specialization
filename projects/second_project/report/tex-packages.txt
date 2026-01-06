@@ -1,0 +1,7 @@
+qcircuit
+standalone
+geometry
+enumitem
+pgf
+quantikz
+float
