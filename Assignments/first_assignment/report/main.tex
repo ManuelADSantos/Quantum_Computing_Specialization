@@ -1,15 +1,16 @@
 \documentclass{article}
+
+% ================== Packages ==================
 \usepackage{tikz}
 \usepackage{quantikz}
 \usepackage{braket}
-% \usepackage[braket, qm]{qcircuit}
-% \usepackage{graphicx}
 \usepackage[margin=1in]{geometry}
 \usepackage{enumitem}
 \usepackage{float}
 
 \graphicspath{{./Images/}}
 
+% ================== Title ==================
 \title{Introduction to Quantum Information and Quantum Computing\\Assignment 1}
 \author{Manuel Santos - 2019231352}
 \date{November 2025}
@@ -19,15 +20,14 @@
 \maketitle
 
 
-% ========== 
+% ================== Introduction ==================
 \section*{Introduction}
 \indent This report presents the solution to Assignment 1 of the Introduction to Quantum Information and Quantum Computing course. 
 
 The goal of this assignment is to illustrate a fundamental feature of quantum mechanics: measurement outcomes do not, in general, possess predetermined values prior to measurement—unless one is willing to accept the possibility of faster-than-light communication.
 
-% ========== 1)
+% ================== 1 ==================
 \section{Preparation of a shared state}
-
 Alice (A), Bob (B), and Charlie (C) are separated from each other by a considerable distance. A source (S) has prepared three qubits in the so-called $\ket{\mathrm{GHZ}}$ state, according to the circuit below, and sent one qubit to each of them. As always, the qubits all start in the $\ket{0}$ state before passing through the circuit.
 
 \begin{figure}[H]
@@ -49,7 +49,7 @@ Alice (A), Bob (B), and Charlie (C) are separated from each other by a considera
             \draw[->, line width=1.2pt] (s) -- (alice);
         \end{tikzpicture}
     \end{minipage}
-    % \hfill
+
     % --- Right figure in a minipage ---
     \begin{minipage}{0.49\textwidth}
         \centering
@@ -58,21 +58,11 @@ Alice (A), Bob (B), and Charlie (C) are separated from each other by a considera
             \lstick{$B:$} &          &                                      & & \targ{}   & &           & & & &\\
             \lstick{$C:$} &          &                                      & &           & & \targ{}   & & & &
         \end{quantikz}
-        % \scalebox{1.0}
-        % {
-        % \Qcircuit @C=1.0em @R=1.0em { \\
-        % \lstick{A :  } & \gate{\mathrm{H}} \barrier[0em]{2}^{\text{\ket{\mathrm{Barrier}}}} & \qw & \ctrl{1} & \ctrl{2} & \qw \barrier[-1em]{2} & \qw\\
-        % \lstick{B :  } & \qw & \qw & \targ & \qw & \qw & \qw\\
-        % \lstick{C :  } & \qw & \qw & \qw & \targ & \qw & \qw\\}
-        % \\}
     \end{minipage}
     \caption{System and circuit representation}
     \label{fig:ex1_system}
 \end{figure}
 
-% $\ket{0}$
-% $\bra{1}$
-% $\braket{0|1}$
 
 \begin{enumerate}[label=(\alph*)]
     % Question A
@@ -119,24 +109,13 @@ Alice (A), Bob (B), and Charlie (C) are separated from each other by a considera
 
 \end{enumerate}
 
-% ========== 2)
+% ================== 2 ==================
 \section{Independent Operations}
 
 After receiving their qubit, Alice, Bob, and Charlie each apply one of two operations to their qubit: either $M_X = H \quad \text{or} \quad M_Y = H S^\dagger$. Immediately afterward, each of them measures their qubit.
 
 \begin{enumerate}[label=(\alph*)]
     \item Let's start with the case in which all of them apply $M_X = H$, to which we'll call state $\ket{\mathrm{XXX}}$. The following circuit generates state $\ket{\mathrm{XXX}}$: 
-    % \begin{figure}[H]
-    %     \centering
-    %     \begin{quantikz}[wire types={q,q,q,c}]
-    %         \lstick{$A:$} & \gate{H} & \ctrl{1} & \ctrl{2} & \slice[style=black]{$\ket{\mathrm{GHZ}}$} & & \gate{H} & \slice[style=black]{} & & \meter{} & & &\\
-    %         \lstick{$B:$} & & \targ{} & & & & \gate{H} & & & & \meter{} & &\\
-    %         \lstick{$C:$} & & & \targ{} & & & \gate{H} & & & & & \meter{} &\\
-    %         \lstick{$meas:$} & \qwbundle{3} & & & & & & & & \wire[u][3]{\substack{c \\[2pt] 3}} & \wire[u][2]{c} & \wire[u][1]{c} &
-    %     \end{quantikz}        
-    %     \caption{Circuit XXX for all applying $M_X = H$}
-    %     \label{fig:mx_circuit}
-    % \end{figure}
 
     We expect the $\ket{\mathrm{XXX}}$ state to be:
     
@@ -212,15 +191,8 @@ After receiving their qubit, Alice, Bob, and Charlie each apply one of two opera
     
 \end{enumerate}
 
-
-% ========== 
-% \section*{Conclusion}
-
-
-
 %\sloppy
 %\nocite{*}
 %\printbibliography
-
 
 \end{document}
