@@ -1,0 +1,324 @@
+\documentclass{article}
+
+% ================== Packages ==================
+\usepackage{qcircuit}              % quantum circuit diagrams
+\usepackage{braket}                % Dirac notation: \ket, \bra, \braket
+\usepackage{graphicx}              % for images
+\usepackage[margin=1in]{geometry}  % page margins
+\usepackage{enumitem}              % lists
+\usepackage{amsmath}               % math
+\usepackage{float}                 % [H] option for figures
+\usepackage{hyperref}              % clickable URLs
+\usepackage{pdfpages}              % include pdfs
+
+\allowdisplaybreaks
+
+% ================== Title ==================
+\title{Introduction to Quantum Information and Quantum Computing\\Last Assignment}
+\author{Manuel Santos -- 2019231352}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+% ================== Introduction ==================
+\section*{Introduction}
+This report presents the solution to the last assignment of the Introduction to Quantum Information and Quantum Computing course.
+
+The objective of this assignment is to review the topics covered throughout the course.
+It has 3 sections:
+\begin{itemize}
+    \item Quantum States
+    \item Quantum Operations
+    \item Entanglement and Entanglement Swapping
+\end{itemize}
+
+% ================== 1 ==================
+\section{Quantum States}
+\subsection*{a)} Let \(\ket{\psi}\) be the following state \[\ket{\psi} = \frac{8}{17}\ket{0} - \frac{15}{17}\ket{1}\]
+The amplitude associated with state \(\ket{0}\) is \(\frac{8}{17}\) and the amplitude associated with state \(\ket{1}\) is \(-\frac{15}{17}\).
+As so, and knowing that the probability of measuring a given state is given by the square of the absolute value of the amplitude associated with that state, we have:
+\begin{itemize}
+    \item Probability of measuring state \(\ket{0}\):
+    \[P(\ket{0}) = \left|\frac{8}{17}\right|^2 = \frac{64}{289} \approx 0.2215 = 22.15\%\]
+    \item Probability of measuring state \(\ket{1}\):
+    \[P(\ket{1}) = \left|-\frac{15}{17}\right|^2 = \frac{225}{289} \approx 0.7786 = 77.86\%\]
+\end{itemize}
+
+\subsection*{b)} To show that the state \(\ket{\psi}\) is normalized, we need to verify that the sum of the squares of the absolute values of its amplitudes equals 1.
+Calculating this, we have:
+\[P(\ket{0}) + P(\ket{1}) = \frac{64}{289} + \frac{225}{289} = \frac{289}{289} = 1\]
+Since the sum equals 1, we conclude that the state \(\ket{\psi}\) is indeed normalized, and thus a valid quantum state.
+
+\subsection*{c)} By applying a X gate to the state \(\ket{\psi}\), we swap the amplitudes of the basis states \(\ket{0}\) and \(\ket{1}\).
+Thus, the new state after applying the X gate is:
+\[
+    \begin{aligned}
+        X\ket{\psi}
+        &= \frac{8}{17} X\ket{0} - \frac{15}{17} X\ket{1} \\
+        &= \frac{8}{17}\frac{\ket{0} + \ket{1}}{\sqrt{2}}
+        - \frac{15}{17}\frac{\ket{0} - \ket{1}}{\sqrt{2}} \\
+        &= \frac{1}{\sqrt{2}}\left(\frac{8}{17} - \frac{15}{17}\right)\ket{0}
+        + \frac{1}{\sqrt{2}}\left(\frac{8}{17} + \frac{15}{17}\right)\ket{1} \\
+        &= -\frac{7}{17\sqrt{2}}\ket{0} + \frac{23}{17\sqrt{2}}\ket{1}
+    \end{aligned}
+\]
+Knowing that the amplitudes are now \(-\frac{7}{17\sqrt{2}}\) for state \(\ket{0}\) and \(\frac{23}{17\sqrt{2}}\) for state \(\ket{1}\), we can calculate the probabilities of measuring each state:
+\begin{itemize}
+    \item Probability of measuring state \(\ket{0}\):
+    \[P(\ket{0}) = \left|-\frac{7}{17\sqrt{2}}\right|^2 = \frac{49}{578} \approx 0.0848 = 8.48\%\]
+    \item Probability of measuring state \(\ket{1}\):
+    \[P(\ket{1}) = \left|\frac{23}{17\sqrt{2}}\right|^2 = \frac{529}{578} \approx 0.9152 = 91.52\%
+    \]
+\end{itemize}
+
+\subsection*{d)} If five people each have one qubit, the collective state of the five qubits can be described using \(2^5\) amplitudes.
+This is because each qubit can be in one of two states \(\ket{0}\) or \(\ket{1}\), and for \(n\) qubits, the total number of possible states is \(2^n\).
+Therefore, for five qubits we need:
+\[2^5 = 32\]
+amplitudes to fully describe the collective state of the five qubits.
+
+
+% ================== 2 =================
+\section{Quantum Operations}
+\subsection*{a)} Let us have two operations \[H = \frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1 \\ 1 & -1\end{pmatrix} \hspace{20pt} \sqrt{Y} = \frac{1}{\sqrt{2}}\begin{pmatrix}1 & -1 \\ 1 & 1\end{pmatrix}\]
+Ii is possible to identify H as the Hadamard gate. As so, we can calculate the states:
+\begin{itemize}
+    % a)
+    \item \(\ket{a} = H\ket{0}\)
+
+    Knowing that H is the Hadamard gate, we have:
+    \[
+        H\ket{0} = \frac{\ket{0} + \ket{1}}{\sqrt{2}} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}
+    \]
+    By doing the matrix multiplication, we have:
+    \[
+        \frac{1}{\sqrt{2}} \begin{pmatrix}1 & 1 \\ 1 & -1\end{pmatrix}\begin{pmatrix}1 \\ 0\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 1\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 0\end{pmatrix} + \frac{1}{\sqrt{2}}\begin{pmatrix}0 \\ 1\end{pmatrix} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}
+    \]
+    % b)
+    \item \(\ket{b} = H\ket{1}\)
+
+    Performing the matrix multiplication, we obtain
+    \[
+        H\ket{1} = \frac{\ket{0} - \ket{1}}{\sqrt{2}} = \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1}
+    \]
+    Performing the matrix multiplication, we obtain
+    \[
+        \frac{1}{\sqrt{2}} \begin{pmatrix}1 & 1 \\ 1 & -1\end{pmatrix}\begin{pmatrix}0 \\ 1\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ -1\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 0\end{pmatrix} - \frac{1}{\sqrt{2}}\begin{pmatrix}0 \\ 1\end{pmatrix} = \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1}
+    \]
+\end{itemize}
+Let's try to identify if \(\sqrt{Y}\) corresponds to a known gate.
+By comparing the matrix of \(\sqrt{Y}\) with known quantum gates, we can see that it resembles the matrix of a rotation around the Y-axis by \(\frac{\pi}{2}\) radians, denoted as \(R_y\left(\frac{\pi}{2}\right)\):
+\[R_y\left(\frac{\pi}{2}\right) = \begin{pmatrix}\cos\left(\frac{\pi}{4}\right) & -\sin\left(\frac{\pi}{4}\right) \\ \sin\left(\frac{\pi}{4}\right) & cos\left(\frac{\pi}{4}\right)\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}1 & -1 \\ 1 & 1\end{pmatrix}\]
+Thus, we can conclude that \(\sqrt{Y}\) corresponds to a rotation around the Y-axis by \(\frac{\pi}{2}\) radians. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/ry_pi_2.png}
+    \caption{Rotation around the Y-axis by \(\frac{\pi}{2}\) radians \cite{qcse_ry_pi2_not_hadamard}}
+    \label{fig:ry_pi_2}
+\end{figure}
+
+Therefore, we can calculate the states:
+\begin{itemize}
+    % c)
+    \item \(\ket{c} = \sqrt{Y}\ket{0}\)
+
+    Knowing that \(\sqrt{Y}\) corresponds to a rotation around the Y-axis by \(\frac{\pi}{2}\) radians, we have:
+    \[
+        \sqrt{Y}\ket{0} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}
+    \]
+    Performing the matrix multiplication, we obtain
+    \[
+        \frac{1}{\sqrt{2}} \begin{pmatrix}1 & -1 \\ 1 & 1\end{pmatrix}\begin{pmatrix}1 \\ 0\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 1\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 0\end{pmatrix} + \frac{1}{\sqrt{2}}\begin{pmatrix}0 \\ 1\end{pmatrix} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}
+    \]
+    % d)
+    \item \(\ket{d} = \sqrt{Y}\ket{1}\)
+    
+    Knowing that \(\sqrt{Y}\) corresponds to a rotation around the Y-axis by \(\frac{\pi}{2}\) radians, we have:
+    \[
+        \sqrt{Y}\ket{1} = -\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}
+    \]
+    Performing the matrix multiplication, we obtain
+    \[
+        \frac{1}{\sqrt{2}} \begin{pmatrix}1 & -1 \\ 1 & 1\end{pmatrix}\begin{pmatrix}0 \\ 1\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}-1 \\ 1\end{pmatrix} = -\frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 0\end{pmatrix} + \frac{1}{\sqrt{2}}\begin{pmatrix}0 \\ 1\end{pmatrix} = -\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}
+    \]
+\end{itemize}
+
+\subsection*{b)} To determine if it is possible to experimentally distinguish between the states \(\ket{a}\) and \(\ket{b}\), as well as between \(\ket{c}\) and \(\ket{d}\), we need to analyze the states obtained in the previous section.
+\begin{itemize}
+    \item States \(\ket{a}\) and \(\ket{b}\):
+    \[\ket{a} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\]
+    \[\ket{b} = \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1}\]
+    The states \(\ket{a}\) and \(\ket{b}\) are orthogonal to each other, as their inner product is zero:
+    \[\braket{a|b} = \left(\frac{1}{\sqrt{2}}\bra{0} + \frac{1}{\sqrt{2}}\bra{1}\right)\left(\frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1}\right) = \frac{1}{2} - \frac{1}{2} = 0\]
+    Since they are orthogonal, it is possible to experimentally distinguish between the states \(\ket{a}\) and \(\ket{b}\).
+    
+    \item States \(\ket{c}\) and \(\ket{d}\):
+    \[\ket{c} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\]
+    \[\ket{d} = -\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\]
+    The states \(\ket{c}\) and \(\ket{d}\) are also orthogonal to each other, as their inner product is zero:
+    \[\langle c | d \rangle = \left(\frac{1}{\sqrt{2}}\bra{0} + \frac{1}{\sqrt{2}}\bra{1}\right)\left(-\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\right) = -\frac{1}{2} + \frac{1}{2} = 0\]
+    Since they are orthogonal, it is possible to experimentally distinguish between the states \(\ket{c}\) and \(\ket{d}\).
+\end{itemize}
+
+\subsection*{c)} In order to return to a 100\% probability of measuring the state \(\ket{0}\) after applying the Hadamard gate \(H\) multiple times, we need to apply it an even number of times. 
+As so, applying \(H\) two times will return us to the state \(\ket{0}\) with 100\% probability of measuring \(\ket{0}\).
+Let us analyze analytically the effect of applying \(H\) repeatedly.
+The Hadamard gate transforms the basis states as follows:
+\[H\ket{0} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\]
+\[H\ket{1} = \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1}\]
+Applying \(H\) twice, we have:
+\[
+    \begin{aligned}
+        \ket{0}
+        &\xrightarrow{H} \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1} \\
+        &\xrightarrow{H} \frac{1}{\sqrt{2}}\left(\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\right) + \frac{1}{\sqrt{2}}\left(\frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1}\right) \\
+        & \hspace{20pt}= \frac{1}{2}\ket{0} + \frac{1}{2}\ket{1} + \frac{1}{2}\ket{0} - \frac{1}{2}\ket{1} \\
+        & \hspace{20pt}= \ket{0}
+    \end{aligned}
+\]
+Thus, applying the Hadamard gate \(H\) two times returns us to the state \(\ket{0}\) with 100\% probability of measuring \(\ket{0}\).
+
+Similarly, for the \(\sqrt{Y}\) gate, we analyze its effect when applied multiple times.
+The \(\sqrt{Y}\) gate transforms the basis states as follows:
+\[\sqrt{Y}\ket{0} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\]
+\[\sqrt{Y}\ket{1} = -\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\]
+Applying \(\sqrt{Y}\) four times, we have:
+\[
+    \begin{aligned}
+        \ket{0}
+        &\xrightarrow{\sqrt{Y}} \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1} \\
+        &\xrightarrow{\sqrt{Y}} \frac{1}{\sqrt{2}}\left(\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\right) + \frac{1}{\sqrt{2}}\left(-\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\right) \\
+        & \hspace{20pt}= \frac{1}{2}\ket{0} + \frac{1}{2}\ket{1} - \frac{1}{2}\ket{0} + \frac{1}{2}\ket{1} = \ket{1} \\
+        &\xrightarrow{\sqrt{Y}} -\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1} \\
+        &\xrightarrow{\sqrt{Y}} -\frac{1}{\sqrt{2}}\left(\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\right) + \frac{1}{\sqrt{2}}\left(-\frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\right) \\
+        & \hspace{20pt}= -\frac{1}{2}\ket{0} - \frac{1}{2}\ket{1} - \frac{1}{2}\ket{0} + \frac{1}{2}\ket{1} \\
+        & \hspace{20pt}= -\ket{0}
+    \end{aligned}
+\]
+Although we arrive at the state \(-\ket{0}\), the probability of measuring \(\ket{0}\) remains 100\%:
+\[P(\ket{0}) = \left|-\!1\right|^2 = 1 = 100\%\]
+Thus, applying the \(\sqrt{Y}\) gate four times takes us to the state \(-\ket{0}\) with 100\% probability of measuring \(\ket{0}\).
+
+
+% ================== 3 =================
+\section{Entanglement and Entanglement Swapping}
+Let us consider a scenario where a quantum telecommunications center enables entanglement between two distant qubits without direct communication between the clients, Alice and Bob.
+Each client possesses a qubit that is entangled with another qubit located at the center, resulting in a total of four qubits: one pair shared between Alice and the center, and another pair shared between Bob and the center.
+We will explore how the center can entangle Alice's and Bob's qubits without requiring communication between them.
+
+\subsection*{a)} An example of a Bell entangled state is the \(\ket{\beta_{00}}\) state, which is defined as:
+\[\ket{\beta_{00}} = \frac{1}{\sqrt{2}}\ket{00} + \frac{1}{\sqrt{2}}\ket{11} = \frac{1}{\sqrt{2}}\begin{pmatrix}1_{_{00}} \\ 0_{_{01}} \\ 0_{_{10}}\\ 1_{_{11}}\end{pmatrix}\]
+To generate this Bell state, we can use the following quantum circuit:
+\begin{figure}[h!]
+    \centering
+    \scalebox{1.0}{
+    \Qcircuit @C=1.0em @R=0.2em @!R { \\
+            \nghost{{q}_{0} :  } & \lstick{{q}_{0} :  } & \gate{\mathrm{H}} & \ctrl{1} & \qw & \qw\\
+            \nghost{{q}_{1} :  } & \lstick{{q}_{1} :  } & \qw & \targ & \qw & \qw\\
+    \\ }}
+    \caption{Quantum circuit to generate the Bell state \(\ket{\beta_{00}}\)}
+    \label{fig:bell_state_circuit}
+\end{figure}
+In this circuit, we start with two qubits initialized to the state \(\ket{0}\).
+We first apply a Hadamard gate (H) to the first qubit, which creates a superposition of states.
+Next, we apply a CNOT gate, using the first qubit as the control and the second qubit as the target.
+This operation entangles the two qubits, resulting in the Bell state \(\ket{\beta_{00}}\).
+Analyzing the circuit step by step, we have:
+\[
+    \begin{aligned}
+        \ket{00}
+        &\xrightarrow{H_{0}} \ket{0} \frac{\ket{0}+\ket{1}}{\sqrt{2}} = \frac{1}{\sqrt{2}}\ket{00} + \frac{1}{\sqrt{2}}\ket{01} \\
+        &\xrightarrow{CNOT_{0,1}} \frac{1}{\sqrt{2}}\ket{00} + \frac{1}{\sqrt{2}}\ket{11} \\
+        & = \ket{\beta_{00}}
+    \end{aligned}
+\]
+
+\subsection*{b)} To create entanglement between Alice's and Bob's qubits through the center, we can design a quantum circuit with four qubits: 
+\begin{itemize}
+    \item the top two qubits (q0 and q1) belong to the center
+    \item the third qubit (q2) belongs to Alice
+    \item the fourth qubit (q3) belongs to Bob
+\end{itemize}
+In order to ease the visualization, it's important to note that the \(2^4 = 16\) states will use the notation \[\ket{q_3 \hspace{2pt} q_2 \hspace{2pt} q_1 \hspace{2pt} q_0}\]
+.
+The circuit consists of two main steps:
+\begin{itemize}
+    \item Preliminary Entanglement Creation: We first create entanglement between the center and the clients by applying the Bell state circuit to qubits q0 and q2 (center and Alice) and also to qubits q1 and q3 (center and Bob).
+    \item Entanglement Swapping: To create entanglement between Alice and Bob, the center applies the inverse Bell state circuit to its qubits (q0 and q1) and measures them. For analysis purposes, Alice and Bob also measure their qubits.
+\end{itemize}
+The quantum circuit for this process is illustrated below:
+\begin{figure}[H]
+    \centering
+    \scalebox{1.0}{
+    \Qcircuit @C=1.0em @R=0.2em @!R { \\
+            \nghost{{q}_{0} :  } & \lstick{{q}_{0} :  } & \gate{\mathrm{H}} & \ctrl{2} \barrier[0em]{3} & \qw & \qw & \qw \barrier[0em]{3} & \qw & \ctrl{1} & \gate{\mathrm{H}} \barrier[0em]{3} & \qw & \meter & \qw & \qw & \qw & \qw & \qw\\
+            \nghost{{q}_{1} :  } & \lstick{{q}_{1} :  } & \qw & \qw & \qw & \gate{\mathrm{H}} & \ctrl{2} & \qw & \targ & \qw & \qw & \qw & \meter & \qw & \qw & \qw & \qw\\
+            \nghost{{q}_{2} :  } & \lstick{{q}_{2} :  } & \qw & \targ & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \meter & \qw & \qw & \qw\\
+            \nghost{{q}_{3} :  } & \lstick{{q}_{3} :  } & \qw & \qw & \qw & \qw & \targ & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \meter & \qw & \qw\\
+            \nghost{\mathrm{{meas} :  }} & \lstick{\mathrm{{meas} :  }} & \lstick{/_{_{4}}} \cw & \cw & \cw & \cw & \cw & \cw & \cw & \cw & \cw & \dstick{_{_{\hspace{0.0em}0}}} \cw \ar @{<=} [-4,0] & \dstick{_{_{\hspace{0.0em}1}}} \cw \ar @{<=} [-3,0] & \dstick{_{_{\hspace{0.0em}2}}} \cw \ar @{<=} [-2,0] & \dstick{_{_{\hspace{0.0em}3}}} \cw \ar @{<=} [-1,0] & \cw & \cw\\
+    \\ }}
+    \caption{Quantum circuit for entanglement swapping between Alice and Bob through the center}
+    \label{fig:entanglement_swapping_circuit}
+\end{figure}
+
+\subsection*{c)} After executing the entanglement swapping circuit, we can analyze the measurement results of Alice's and Bob's qubits to determine the resulting entangled state between them.
+By simulating the circuit 1024 times, we obtain the following histogram of measurement results for Alice's and Bob's qubits:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/entanglement_swapping_histogram.png}
+    \caption{Histogram of measurement results for Alice's and Bob's qubits after entanglement swapping}
+    \label{fig:entanglement_swapping_histogram}
+\end{figure}
+
+
+\subsection*{d)} Focusing on the cases where the center measures \(\ket{0}\) on both of its qubits (\(\ket{0000}\) and \(\ket{1100}\)), we can analyze the correlation between Alice's and Bob's measurements.
+
+From the histogram, we observe that when the center measures \(\ket{00}\), Alice and Bob's measurement results are correlated.
+
+Specifically, when Alice measures \(\ket{0}\), Bob also measures \(\ket{0}\), and when Alice measures \(\ket{1}\), Bob measures \(\ket{1}\).
+
+This correlation indicates that Alice's and Bob's qubits are indeed entangled as a result of the entanglement swapping process facilitated by the center.
+
+
+\subsection*{e)}
+Let us calculate analytically the state of the four qubits before the measurements.
+We start with the initial state of the four qubits all initialized to \(\ket{0}\):
+\[
+    \begin{aligned}
+        \ket{0000}
+        &\xrightarrow{H_{q_0}} \ket{000} \frac{\ket{0} + \ket{1}}{\sqrt{2}} = \frac{1}{\sqrt{2}}\ket{0000} + \frac{1}{\sqrt{2}}\ket{0001}\\
+        &\xrightarrow{CNOT_{q_0,q_2}} \frac{1}{\sqrt{2}}\ket{0000} + \frac{1}{\sqrt{2}}\ket{0101} \\
+        &\xrightarrow{H_{q_1}} \frac{1}{\sqrt{2}}\left(\ket{00}\frac{\ket{0} + \ket{1}}{\sqrt{2}}\ket{0}\right) + \frac{1}{\sqrt{2}}\left(\ket{01}\frac{\ket{0} + \ket{1}}{\sqrt{2}}\ket{1}\right) \\
+        & \hspace{20pt}= \frac{1}{2}\ket{0000} + \frac{1}{2}\ket{0010} + \frac{1}{2}\ket{0101} + \frac{1}{2}\ket{0111} \\
+        &\xrightarrow{CNOT_{q_1,q_3}} \frac{1}{2}\ket{0000} + \frac{1}{2}\ket{1010} + \frac{1}{2}\ket{0101} + \frac{1}{2}\ket{1111} \\
+        &\xrightarrow{CNOT_{q_0,q_1}} \frac{1}{2}\ket{0000} + \frac{1}{2}\ket{1010} + \frac{1}{2}\ket{0111} + \frac{1}{2}\ket{1101} \\
+        &\xrightarrow{H_{q_0}} \frac{1}{2}\left(\ket{000}\frac{\ket{0} + \ket{1}}{\sqrt{2}}\right) + \frac{1}{2}\left(\ket{101}\frac{\ket{0} + \ket{1}}{\sqrt{2}}\right) + \frac{1}{2}\left(\ket{011}\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right) + \frac{1}{2}\left(\ket{110}\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right) \\
+        & \hspace{-30pt}= \frac{1}{2\sqrt{2}}\ket{0000} + \frac{1}{2\sqrt{2}}\ket{0001} + \frac{1}{2\sqrt{2}}\ket{1010} + \frac{1}{2\sqrt{2}}\ket{1011} + \frac{1}{2\sqrt{2}}\ket{0110} - \frac{1}{2\sqrt{2}}\ket{0111} + \frac{1}{2\sqrt{2}}\ket{1100} - \frac{1}{2\sqrt{2}}\ket{1101} \\
+    \end{aligned}
+\]
+If the center measures \(\ket{00}\) on its qubits (q0 and q1), we would be left with two possible states for Alice and Bob's qubits (q2 and q3):
+\[\frac{1}{2\sqrt{2}}\ket{00} + \frac{1}{2\sqrt{2}}\ket{11}\]
+As so, triggered by the center measuring \(\ket{00}\), Alice's and Bob's qubits form a maximally entangled Bell state.  
+This shows that entanglement has been successfully swapped from the center to the distant qubits without direct interaction.  
+
+% ================== Conclusion ==================
+\section*{Conclusion}
+This report presented the solutions to the last assignment of the Introduction to Quantum Information and Quantum Computing course.
+The assignment covered three main sections: Quantum States, Quantum Operations, and Entanglement and Entanglement Swapping.
+Through various calculations and analyses, we explored the properties of quantum states, the effects of quantum operations, and the process of entanglement swapping.
+The results demonstrate the fundamental principles of quantum mechanics and quantum information theory, highlighting the intriguing phenomena of superposition, entanglement, and quantum measurement.
+Overall, this assignment provided a comprehensive review of the key concepts covered throughout the course, reinforcing our understanding of quantum information and quantum computing.
+
+% ================== Bibliography ==================
+\section*{Bibliography}
+\bibliographystyle{plain}
+\bibliography{references}
+
+% ================== Appendix ==================
+\section*{Appendix}
+\includepdf[pages=-]{handwritten_resolution.pdf
+}
+
+\end{document}
